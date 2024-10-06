@@ -15,7 +15,7 @@ const Reset = () => {
       const formData = new FormData(e.currentTarget);
       const email = formData.get("email");
       console.log("email: ", email);
-
+  
       const res = await apiRequest.post("/settings/forgot-password", { email });
       console.log(res.data.Status);
 

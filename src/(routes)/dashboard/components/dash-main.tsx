@@ -14,7 +14,6 @@ const DashMain = () => {
   const [page, setPage] = useState(1);
 
   const [searchField, setSearchField] = useState("");
-  const [error, setError] = useState("");
 
   // Fetch initial data when the component is mounted
   const fetchInitialData = async () => {
@@ -66,7 +65,6 @@ const DashMain = () => {
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
 
     if (searchField === "") {
@@ -78,7 +76,6 @@ const DashMain = () => {
         setMore(false); // Assume no pagination for search results
       } catch (err: any) {
         console.log(err);
-        setError(err.response.data.message);
       } finally {
         setLoading(false);
       }
