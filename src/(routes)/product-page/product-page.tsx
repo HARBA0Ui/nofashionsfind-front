@@ -207,7 +207,7 @@ const ProductPage = () => {
           </div>
         </div>
       )}
-      <div className="line w-[650px] mx-auto mt-6"></div>
+      <div className="line w-[80%] md:w-[650px] mx-auto mt-6"></div>
       <h1 className="text-center text-4xl md:text-5xl my-6 md:my-10">
         Our Latest Products
       </h1>
