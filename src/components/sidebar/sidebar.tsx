@@ -23,7 +23,7 @@ const Sidebar = () => {
     <div
       className={`${
         styles.div
-      } fixed inset-0 z-30 bg-zinc-950/50 transition-all 
+      } fixed inset-0 z-30 bg-zinc-950/50 transition-all h-[100vh]
        ${!toggle && "hidden"}
       `}
     >
