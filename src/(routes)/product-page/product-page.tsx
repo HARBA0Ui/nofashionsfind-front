@@ -6,7 +6,7 @@ import apiRequest from "@/lib/apiRequest";
 
 import { CgSpinner } from "react-icons/cg";
 
-import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+// import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import { Product } from "@/types/product";
 
 const ProductPage = () => {

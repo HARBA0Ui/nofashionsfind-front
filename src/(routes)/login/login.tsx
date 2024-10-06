@@ -3,6 +3,7 @@ import apiRequest from "@/lib/apiRequest";
 import { useContext, useEffect, useState } from "react";
 import { FaKey, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import { CgSpinnerTwo } from "react-icons/cg";
 
 const Login = () => {
   const { admin, updateAdmin } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const Login = () => {
       updateAdmin(res.data);
       setLoading(false);
       navigate("/dashboard");
-    } catch (err:any) {
+    } catch (err: any) {
       setError(err.response.data.message);
       console.log(err);
     } finally {
@@ -39,7 +40,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    console.log("admin: ",admin)
+    console.log("admin: ", admin);
     if (admin) {
       navigate("/");
       return;
@@ -53,7 +54,7 @@ const Login = () => {
         </h1>
         <form
           action=""
-            onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           className=" flex flex-col gap-6 py-6 w-full"
         >
           <div className="relative w-4/5 pl-10 pr-3 mx-auto border-b border-pinky">
@@ -89,27 +90,19 @@ const Login = () => {
 
           <div className="mx-auto w-4/5">
             <button
-              //   disabled={isLoading}
+                disabled={isLoading}
               type="submit"
-              className={`w-full h-14 bg-white text-zinc-950 hover:bg-white/90 transition-all mt-6 text-xl relative rounded-[.2rem]`}
-              //   className={`
-              //     ${isLoading && "[border-radius: 5rem]"}
-              //     w-full h-14 text-white mt-6  bg-pinky hover:bg-pinky/95 text-xl relative
-              //     `}
+              className={`w-full h-14 bg-white text-zinc-950 hover:bg-white/90 transition-all mt-6 text-xl relative rounded-[.2rem] flex items-center gap-x-3 justify-center`}
             >
               Login
-              {/* {isLoading && (
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                      <CgSpinnerTwo className="w-6 h-6 animate-spin" />
-                    </div>
-                  )} */}
+              {isLoading && <CgSpinnerTwo className="w-6 h-6 animate-spin" />}
             </button>
           </div>
           {error != "" && (
-                <p className="bg-red-600 text-white text-md py-2 w-4/5 mx-auto text-center mt-4 ">
-                  {error}
-                </p>
-              )}
+            <p className="bg-red-600 text-white text-md w-4/5 mx-auto text-center mt-4 py-4">
+              {error}
+            </p>
+          )}
         </form>
       </div>
     </div>

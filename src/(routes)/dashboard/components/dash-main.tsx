@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { CgMathPlus, CgSearch, CgSpinner } from "react-icons/cg";
 import { useEffect, useState } from "react";
 import apiRequest from "@/lib/apiRequest";
+import { Product } from "@/types/product";
 
 const DashMain = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [more, setMore] = useState(true);

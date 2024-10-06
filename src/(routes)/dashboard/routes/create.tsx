@@ -1,26 +1,23 @@
 import { useProducts } from "@/context/products-context";
 import apiRequest from "@/lib/apiRequest";
-import { Edit} from "lucide-react";
-import {  useState } from "react";
+import { Edit } from "lucide-react";
+import { useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import { HiMiniCursorArrowRays } from "react-icons/hi2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiFillCheckCircle } from "react-icons/ai";
 
 const CreateProduct = () => {
   const { prdCategories } = useProducts();
 
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<File[]>([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState<any | undefined>(undefined);
   const [category, setCategory] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
-  const [newCategry, setNewCategory] = useState("");
 
   const [success, setSuccess] = useState(false);
-
-  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +33,7 @@ const CreateProduct = () => {
       formData.append("desc", desc);
       formData.append("price", price);
       formData.append("category", category);
-      Array.from(images).forEach((img) => formData.append("images", img));
+      images.forEach((img) => formData.append("images", img));
 
       const res = await apiRequest.post("/products", formData);
       console.log(res);
@@ -153,7 +150,14 @@ const CreateProduct = () => {
                   name="images"
                   id="images"
                   multiple
-                  onChange={(e) => setImages(e.target.files)}
+                  onChange={(e) => {
+                    const files = e.target.files;
+                    if (files) {
+                      setImages(Array.from(files)); 
+                    } else {
+                      setImages([]); 
+                    }
+                  }}
                   required
                 />
                 <div id="fileOverlay" className="hover:bg-zinc-300 w-full">

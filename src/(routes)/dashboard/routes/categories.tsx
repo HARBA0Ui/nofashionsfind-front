@@ -8,7 +8,6 @@ const Categories = () => {
   const { prdCategories, setPrdCategories } = useProducts();
   const [newCategory, setNewCategory] = useState("");
   const [loading, setLoading] = useState(false);
-  const [delLoading, setDelLoading] = useState(false);
 
   const addCategory = async (e: React.FormEvent<HTMLFormElement>) => {
     setLoading(true);
@@ -23,7 +22,10 @@ const Categories = () => {
       });
 
       setPrdCategories((prev: any) => {
-        const updatedCategories = [...prev, { id: res.data.id, title: newCategory }];
+        const updatedCategories = [
+          ...prev,
+          { id: res.data.id, title: newCategory },
+        ];
         localStorage.setItem(
           "prdCategories",
           JSON.stringify(updatedCategories)
@@ -31,8 +33,6 @@ const Categories = () => {
 
         return updatedCategories;
       });
-
-      // window.location.reload()
     } catch (err) {
       console.log(err);
     } finally {
@@ -42,10 +42,9 @@ const Categories = () => {
   };
 
   const handleDelete = async (id: any) => {
-    console.log("id", id)
+    console.log("id", id);
     try {
-      setDelLoading(true);
-      const res = await apiRequest.delete(`/products/categories/${id}`);
+      await apiRequest.delete(`/products/categories/${id}`);
 
       setPrdCategories((prev: any) => {
         const updatedCategories = prev.filter((cat: any) => cat.id != id);
@@ -56,11 +55,9 @@ const Categories = () => {
 
         return updatedCategories;
       });
-      // window.location.reload();
     } catch (err) {
       console.log(err);
     } finally {
-      setDelLoading(false);
     }
   };
   return (
@@ -92,7 +89,7 @@ const Categories = () => {
           required
         />
         <button
-          className="bg-black text-white px-4 py-2 rounded-[.5rem] text-sm h-16 w-[350px] block mt-6 flex justify-center items-center gap-x-3"
+          className="bg-black text-white px-4 py-2 rounded-[.5rem] text-sm h-16 w-[350px] mt-6 flex justify-center items-center gap-x-3"
           type="submit"
         >
           Add {loading && <CgSpinner className="w-5 h-5 animate-spin" />}

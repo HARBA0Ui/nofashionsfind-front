@@ -6,7 +6,7 @@ interface AuthContextType{
   updateAdmin: (data: any) => void;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(
+export const AuthContext = createContext<AuthContextType | undefined | any>(
   undefined
 );
 

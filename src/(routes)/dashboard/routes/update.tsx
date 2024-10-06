@@ -7,16 +7,17 @@ import { Link, useParams } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import { useProducts } from "@/context/products-context";
 import { Edit } from "lucide-react";
+import { Product } from "@/types/product";
 
 const UpdateProduct = () => {
   const { id } = useParams();
   const { prdCategories } = useProducts();
 
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<File[]>([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [price, setPrice] = useState("");
-  const [product, setProduct] = useState();
+  const [price, setPrice] = useState<any>();
+  const [product, setProduct] = useState<Product>();
   const [category, setCategory] = useState("");
 
   const [success, setSuccess] = useState(false);
@@ -36,13 +37,11 @@ const UpdateProduct = () => {
       formData.append("desc", desc);
       formData.append("price", price);
       formData.append("category", category);
-      //addimages
       if (images.length > 0) {
         Array.from(images).forEach((img) => formData.append("images", img));
       }
       const res = await apiRequest.put(`/products/${id}`, formData);
       console.log(res);
-      // window.location.reload();
 
       setSuccess(true);
     } catch (err) {
@@ -179,7 +178,14 @@ const UpdateProduct = () => {
                       name="images"
                       id="images"
                       multiple
-                      onChange={(e) => setImages(e.target.files)}
+                      onChange={(e) => {
+                        const files = e.target.files;
+                        if (files) {
+                          setImages(Array.from(files)); 
+                        } else {
+                          setImages([]);
+                        }
+                      }}
                     />
                     <div id="fileOverlay" className="hover:bg-zinc-300 w-full">
                       {images.length == 0 ? (

@@ -1,8 +1,8 @@
 import apiRequest from "@/lib/apiRequest";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-
+import { CgSpinnerTwo } from 'react-icons/cg';
 
 const Reset = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ const Reset = () => {
     try {
       const formData = new FormData(e.currentTarget);
       const email = formData.get("email");
-      console.log("email: ", email)
+      console.log("email: ", email);
 
       const res = await apiRequest.post("/settings/forgot-password", { email });
       console.log(res.data.Status);
@@ -26,6 +26,7 @@ const Reset = () => {
     } catch (err) {
       console.log(err);
     } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -36,7 +37,7 @@ const Reset = () => {
         </h1>
         <form
           action=""
-            onSubmit={handleSubmit}
+          onSubmit={handleSubmit}
           className=" flex flex-col gap-4 py-2 w-full"
         >
           <div className="relative w-4/5 pl-10 pr-3 mx-auto border-b border-pinky">
@@ -54,28 +55,15 @@ const Reset = () => {
 
           <div className="mx-auto w-4/5">
             <button
-              //   disabled={isLoading}
+              disabled={isLoading}
               type="submit"
               id="loginbtn"
-              className={`w-full h-14 bg-white text-zinc-950 hover:bg-white/90 transition-all mt-6 text-xl relative rounded-[.2rem]`}
-              //   className={`
-              //     ${isLoading && "[border-radius: 5rem]"}
-              //     w-full h-14 text-white mt-6  bg-pinky hover:bg-pinky/95 text-xl relative
-              //     `}
-            >
-              Submit
-              {/* {isLoading && (
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                      <CgSpinnerTwo className="w-6 h-6 animate-spin" />
-                    </div>
-                  )} */}
+              className={`w-full h-14 bg-white text-zinc-950 hover:bg-white/90 transition-all mt-6 relative rounded-[.2rem] flex items-center gap-x-3 justify-center`}
+              >
+                Submit
+                {isLoading && <CgSpinnerTwo className="w-6 h-6 animate-spin" />}
             </button>
           </div>
-          {/* {error != "" && (
-                <p className="bg-red-600 text-white text-md py-2 w-4/5 mx-auto text-center mt-4 ">
-                  {error}
-                </p>
-              )} */}
         </form>
       </div>
     </div>
