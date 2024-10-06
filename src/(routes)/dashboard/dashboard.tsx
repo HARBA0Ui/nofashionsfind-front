@@ -6,7 +6,7 @@ import { useContext, useEffect } from "react";
 
 const Dashboard = () => {
 
-  const {admin}= useContext(AuthContext)
+  const {admin}= useContext(AuthContext);
   const navigate= useNavigate()
 
   useEffect(() => {

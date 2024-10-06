@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { CgSpinner } from "react-icons/cg";
 import { useProducts } from "@/context/products-context";
 import { useInView } from "react-intersection-observer";
+import { Product } from "@/types/product";
 
 const Products = () => {
   const { category } = useParams();
@@ -14,7 +15,7 @@ const Products = () => {
 
   const latestFourProducts = latestProducts?.slice(0, 4);
 
-  const [allProducts, setAllProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 

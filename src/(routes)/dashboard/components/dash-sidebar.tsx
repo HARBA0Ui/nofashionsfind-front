@@ -1,6 +1,6 @@
 import apiRequest from "@/lib/apiRequest";
 import { Library } from "lucide-react";
-import { AiFillSetting, AiFillSwitcher, AiOutlineLogout } from "react-icons/ai";
+import {  AiFillSwitcher, AiOutlineLogout } from "react-icons/ai";
 import { CgMathPlus } from "react-icons/cg";
 
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ const DashSidebar = () => {
   const navigate = useNavigate();
   const signout = async () => {
     try {
-      const res = await apiRequest.post("/auth/logout");
+      await apiRequest.post("/auth/logout");
       localStorage.removeItem("admin");
       navigate("/");
     } catch (err) {

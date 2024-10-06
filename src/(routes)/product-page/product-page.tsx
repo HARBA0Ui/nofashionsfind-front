@@ -7,14 +7,15 @@ import apiRequest from "@/lib/apiRequest";
 import { CgSpinner } from "react-icons/cg";
 
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { Product } from "@/types/product";
 
 const ProductPage = () => {
   const params = useParams();
   const { id } = params;
 
-  const [{ isPending }] = usePayPalScriptReducer();
+  // const [{ isPending }] = usePayPalScriptReducer();
 
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState<Product>();
   const [loading, setLoading] = useState(false);
 
   const [quantity, setQuantity] = useState(1);
@@ -181,7 +182,7 @@ const ProductPage = () => {
               <div className="flex items-center space-x-2 w-full">
                 <input
                   value={quantity}
-                  onChange={(e) => setQuantity(e.target.value)}
+                  onChange={(e) => setQuantity(parseInt(e.target.value))}
                   type="number"
                   name="quantity"
                   className="px-2 w-32 text-lg border-zinc-950 border-2 h-[52px] rounded-[.5rem] placeholder:text-black"

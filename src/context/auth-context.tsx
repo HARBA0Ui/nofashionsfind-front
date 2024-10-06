@@ -1,15 +1,8 @@
+import { Admin } from "@/types/admin";
 import { createContext, useEffect, useState } from "react";
 
-// Define the shape of the admin object
-interface Admin {
-  id: string;
-  name: string;
-  role: string;
-  // Add other properties as needed
-}
-
-interface AuthContextType {
-  admin: any;
+interface AuthContextType{
+  admin:  Admin | null;
   updateAdmin: (data: any) => void;
 }
 
@@ -18,7 +11,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 function AuthContextProvider({ children }: { children: React.ReactNode }) {
-  const [admin, setAdmin] = useState<any | null>(() => {
+  const [admin, setAdmin] = useState<Admin | null>(() => {
     const storedAdmin = localStorage.getItem("admin");
     return storedAdmin ? JSON.parse(storedAdmin) : null;
   });
