@@ -34,7 +34,7 @@ const Products = () => {
     const fetchData = async () => {
       if (!inView || loading || !hasMoreData) return; // Avoid multiple fetches
       const limit = 10;
-      
+
       try {
         setLoading(true);
         let res: any;
@@ -50,16 +50,19 @@ const Products = () => {
           setHasMoreData(false); // No more data to load
           return;
         }
-        
+
         if (category === "all") {
           setAllProducts((prevProducts) => [...prevProducts, ...res.data]);
         } else {
-            setAllProducts((prevProducts) => [...prevProducts, ...res.data.products]);
+          setAllProducts((prevProducts) => [
+            ...prevProducts,
+            ...res.data.products,
+          ]);
         }
         setPage((prevPage) => prevPage + 1);
       } catch (err: any) {
         console.log("Error fetching products or categories:", err);
-        setError(err)
+        setError(err);
       } finally {
         setLoading(false);
       }
@@ -71,21 +74,27 @@ const Products = () => {
   return (
     <section className="flex flex-col items-center">
       <h1 className="capitalize text-center text-5xl mt-7">{category}</h1>
-          {loading && !allProducts.length ? (
-            <CgSpinner className="w-6 h-6 my-6 animate-spin mx-auto" />
-          ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 px-8 pt-12 justify-items-center justify-center">
-            {allProducts?.map((p: any) => <Card product={p} key={p.id} />)}
+      {loading && !allProducts.length ? (
+        <CgSpinner className="w-6 h-6 my-6 animate-spin mx-auto" />
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 px-8 pt-12 justify-items-center justify-center">
+          {allProducts?.map((p: any) => (
+            <Card product={p} key={p.id} />
+          ))}
         </div>
-          )}
-      {loading && allProducts?.length > 0 && <CgSpinner className="w-6 h-6 animate-spin mx-auto" />}
+      )}
+      {loading && allProducts?.length > 0 && (
+        <CgSpinner className="w-6 h-6 animate-spin mx-auto" />
+      )}
       <div ref={ref} style={{ height: "60px" }}></div>
-      {
-        (!loading && allProducts.length == 0 && error  ) && <h2 className="text-3xl font-bold -mt-16 mb-20">No Products Found!</h2>
-      }
+      {!loading && allProducts.length === 0 && error && (
+        <h2 className="text-3xl font-bold -mt-16 mb-20">No Products Found!</h2>
+      )}
       {/* Latest Products Section */}
       <div className="line w-[80%] md:w-[650px]"></div>
-      <h1 className="text-center text-4xl md:text-5xl my-6 md:my-10">Our Latest Products</h1>
+      <h1 className="text-center text-4xl md:text-5xl my-6 md:my-10">
+        Our Latest Products
+      </h1>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 px-8 md:px-24 pb-12 justify-items-center justify-center">
         {latestFourProducts?.map((p: any) => (
           <Card product={p} key={p.id} />
