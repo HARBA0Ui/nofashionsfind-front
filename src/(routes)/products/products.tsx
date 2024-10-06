@@ -71,11 +71,12 @@ const Products = () => {
   return (
     <section className="flex flex-col items-center">
       <h1 className="capitalize text-center text-5xl mt-7">{category}</h1>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 px-8 pt-12 justify-items-center justify-center">
-          {loading && !allProducts.length ? (
-            <CgSpinner className="w-6 h-6 animate-spin mx-auto" />
+        {loading && !allProducts.length ? (
+            <CgSpinner className="w-6 h-6 my-6 animate-spin mx-auto" />
           ) : (
-            allProducts?.map((p: any) => <Card product={p} key={p.id} />)
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 px-8 pt-12 justify-items-center justify-center">
+            {allProducts?.map((p: any) => <Card product={p} key={p.id} />)}
+        </div>
           )}
         </div>
       {loading && allProducts?.length > 0 && <CgSpinner className="w-6 h-6 animate-spin mx-auto" />}
