@@ -1,0 +1,54 @@
+.img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.imgWrapper {
+  position: relative;
+}
+
+.imgWrapper::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: black;
+  opacity: 25%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.imgWrapper::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: gray;
+  opacity: 25%;
+  clip-path: circle(0%);
+  transition: 0.3s ease-out;
+  pointer-events: none;
+}
+
+.imgWrapper:hover::after {
+  clip-path: circle(100%);
+}
+
+.input input {
+  background: transparent;
+}
+
+.input{
+  position: relative;
+  width: 250px;
+}
+
+.input::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2.5px;
+    border-radius: 5rem;
+    background: white;
+}

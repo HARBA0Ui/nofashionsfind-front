@@ -1,0 +1,14 @@
+@media (min-width: 768px) {
+  .ul {
+    clip-path: circle(70% at 100%);
+  }
+}
+
+@media (max-width: 768px) {
+    .ul{
+    display: flex;
+        justify-content: center;
+        align-items: center;
+    }    
+}
+  

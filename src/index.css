@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Luckiest+Guy&family=Sriracha&family=Zeyada&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Luckiest+Guy&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sriracha&family=Zeyada&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #fefefe;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-family: "Kaushan Script", cursive;
+}
+input::placeholder,
+textarea::placeholder,
+button {
+  font-family: "Kaushan Script", cursive;
+}
+
+input:focus {
+  outline: none;
+}
+
+::selection{
+  background: #222;
+  color: white;
+}
+
+.container {
+  @apply w-[95vw] sm:w-[90vw] md:w-[80vw] lg:w-[75vw];
+}
+
+.kaush {
+  font-family: "Kaushan Script", cursive !important;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(39, 39, 39, 0.95);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fefefe;
+  border-radius: 6px; /* Rounded corners */
+  border: 3px solid rgba(11, 11, 11, 0.95); /* Padding around the thumb to add space between it and the track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #cccccc; /* Slightly lighter color when hovered */
+}
+
+.imgShadow {
+  box-shadow: 3px 4px 2.5px hwb(0 0% 100% / 0.2);
+}
+
+.line{
+  background: rgba(0, 0, 0, .65);
+  border-radius: 5rem;
+  height: 1.5px;
+}
+
+img{
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+
+#fileTd {
+  position: relative;
+}
+
+#fileTd {
+  height: 250px;
+  border-radius: 1rem;
+}
+
+input[type="file"] {
+  all: unset;
+  opacity: 0;
+  position: absolute;
+  inset: 0;
+  cursor: pointer;
+  border-radius: 1rem;
+}
+
+#fileOverlay {
+  background: black;
+  font-size: 18px;
+  position: absolute;
+  border-radius: 1rem;
+  inset: 0;
+  pointer-events: none;
+  cursor: pointer;
+  color: #fefefe;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transition: 0.3s ease-in-out;
+}
+
+#fileTd:hover #fileOverlay {
+  background: #111;
+  color: white;
+}
+
+#fileTd:hover #fileOverlay svg {
+  color: white;
+}
+
+select option:hover{
+  background: black;
+  color: white;
+}

@@ -1,0 +1,19 @@
+.input input {
+  background: transparent;
+}
+
+.input {
+  position: relative;
+  width: 250px;
+}
+
+.input::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2.5px;
+  border-radius: 5rem;
+  background: black;
+}
